@@ -1,0 +1,15 @@
+[Unit]
+Description=Display manager for automatic session logins
+Documentation=man:nodm(8)
+After=plymouth-quit.service systemd-user-sessions.service
+
+[Service]
+EnvironmentFile=-/etc/default/nodm
+# 77 is EX_NOPERM, and doesn't seem to be used by nodm itself
+# Don't respawn or mark as failed if disabled via /etc/default/nodm
+RestartPreventExitStatus=77
+SuccessExitStatus=77
+ExecStart=/bin/sh -c 'if test ${NODM_ENABLED} = no || test ${NODM_ENABLED} = false; then exit 77; else exec @sbindir@/nodm $NODM_OPTIONS; fi'
+Restart=always
+KillMode=mixed
+TimeoutStopSec=10

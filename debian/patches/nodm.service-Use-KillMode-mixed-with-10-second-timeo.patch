@@ -1,0 +1,25 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Thu, 27 Apr 2017 18:26:38 +0100
+Subject: nodm.service: Use KillMode=mixed with 10 second timeout
+
+For a graceful exit, this should result in almost the same practical
+effect as the use of "--retry 10" in the LSB init script: send SIGTERM
+to main process, wait 10 seconds, send SIGKILL to any remaining
+processes. The difference is that the SIGKILL will catch the entire
+graphical session, not just the nodm processes.
+
+Signed-off-by: Simon McVittie <smcv@debian.org>
+---
+ nodm.service.in | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/nodm.service.in b/nodm.service.in
+index 09119f0..0b7e95b 100644
+--- a/nodm.service.in
++++ b/nodm.service.in
+@@ -8,3 +8,5 @@ EnvironmentFile=-/etc/default/nodm
+ ExecStartPre=/usr/bin/test ${NODM_ENABLED} != no -a ${NODM_ENABLED} != false
+ ExecStart=@sbindir@/nodm $NODM_OPTIONS
+ Restart=always
++KillMode=mixed
++TimeoutStopSec=10

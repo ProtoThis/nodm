@@ -1,0 +1,27 @@
+From 6acf5fb593159dfc6f8a78d3e256901754e787c8 Mon Sep 17 00:00:00 2001
+From: Simon McVittie <smcv@debian.org>
+Date: Sun, 23 Apr 2017 13:23:50 +0100
+Subject: [PATCH] nodm.service: Ask Plymouth to stop before starting nodm
+
+Bug-Debian: https://bugs.debian.org/860463
+Signed-off-by: Simon McVittie <smcv@debian.org>
+---
+ nodm.service.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/nodm.service.in b/nodm.service.in
+index 638f919..09119f0 100644
+--- a/nodm.service.in
++++ b/nodm.service.in
+@@ -1,7 +1,7 @@
+ [Unit]
+ Description=Display manager for automatic session logins
+ Documentation=man:nodm(8)
+-After=systemd-user-sessions.service
++After=plymouth-quit.service systemd-user-sessions.service
+ 
+ [Service]
+ EnvironmentFile=-/etc/default/nodm
+-- 
+2.11.0
+

@@ -1,0 +1,22 @@
+[DESCRIPTION]
+\fBnodm\fP is a minimal display manager that simply logs in as a given user and
+starts an X session, without asking for username or password.
+.P
+On a normal computer, using \fBnodm\fP is a big security issue because it would
+give anyone access to the computer.
+.P
+However, there are cases where automatic login is needed: for example in an
+embedded system such as a mobile phone, or in a kiosk setup, or in a control
+panel for industrial machinery.  For those cases, \fBnodm\fP is simple to
+setup, lightweight, and it should do exactly the right thing.
+
+[AUTHOR]
+\fBnodm\fP is written and maintained by Enrico Zini <enrico@enricozini.org> and
+Joachim Breitner <nomeata@debian.org>.
+
+[SEE ALSO]
+.BR xinit (1),
+.BR xdm (1),
+.BR gdm (1),
+.BR kdm (1).
+
